@@ -1,0 +1,224 @@
+# Alumnos - Bioquímica 2014
+## Descripción
+Aquí presentamos los resultados de las encuestas de `evaluación institucional` llevada a cabo en agosto del 2014 en la que se recabaron datos de los `alumnos de la Carrera de Bioquímica` de la Facultad de Química de la Universidad del Norte. La encuesta consistió en un formulario de `102 preguntas` evaluando cada una de las siguientes dimensiones:
+
+* __Dimensión 1: Organización & Gestión__
+    * 1.1: Organización
+    * 1.2: Gestión
+* __Dimensión 2: Proyecto Académico__
+    * 2.1: Objetivos de carrerra y Perfil del Egresado
+    * 2.2: Plan de estudios
+    * 2.3: Proceso enseñanza-aprendizaje
+    * 2.4: Evaluación del proceso enseñanza-aprendizaje
+    * 2.5: Investigación y extensión
+* __Dimensión 3: Personas__
+    * 3.1: Directivos
+    * 3.2: Docentes
+    * 3.3: Estudiantes
+    * 3.4: Personal administrativo y de apoyo
+* __Dimensión 4: Recursos__
+    * 4.1: Infraestructura, equipamientos e insumos
+
+Se obtuvieron `155` formularios de respuestas, los cuales fueron cargados en una base de datos en formato `.csv` para su análisis estadístico. Los datos fueron preprocesados y analizados con [R](http://www.r-project.org) versión 3.1.1. Este documento fue redactado utilizando MarkDown en [RStudio](http://www.rstudio.com) versión 0.98.501 y el paquete [knitr](http://cran.r-project.org/web/packages/knitr/index.html) versión 1.6 de [Yihui Xie](http://yihui.name/knitr).
+
+```{r GlobalOptions}
+# Establecemos las opciones globales
+require(knitr)
+opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE, fig.height = 8, fig.width = 13)
+```
+
+```{r dataset}
+# Primero cargamos la base de datos
+data.alumnos <- read.csv("../Bioquimica2014Alumnos.csv")
+# Recodificamos todos los niveles para todas las variables que representan preguntas, utilizando las etiquetas establecidas en el formulario
+require(plyr)
+for(i in 3:104){
+data.alumnos[, i] <- factor(data.alumnos[, i])
+data.alumnos[, i] <- revalue(data.alumnos[, i], c("1" = "Sí", "2" = "Parcialmente", "3" = "No", "4" = "Sin opinión/No sabe"))}
+# Cargamos las preguntas contenidas en el formulario
+source("AlumnosQ.R")
+# Para la presentación de los resultados utilizaremos gráficos de barras, según la siguiente función
+Q.plots <- function(x, y){
+table.Q <- prop.table(table(x))*100
+par(mar = c(4, 4, 8, 1), oma = c(2, 2, 2, 2))
+plot.Q <- barplot(table.Q, main = y, cex.main = 2, col = terrain.colors(9),
+                  ylab = "% Alumnos", cex.lab = 1.5, cex.axis = 1.2, cex.names = 1.5)
+text(plot.Q, 2, round(table.Q, 1), cex = 1.5)
+}
+```
+
+***
+
+## Resultados
+### Dimensión 1.1 - Organización
+```{r Q11}
+Q.plots(data.alumnos$Q11.1, Q11.1)
+Q.plots(data.alumnos$Q11.2, Q11.2)
+Q.plots(data.alumnos$Q11.3, Q11.3)
+Q.plots(data.alumnos$Q11.4, Q11.4)
+Q.plots(data.alumnos$Q11.5, Q11.5)
+Q.plots(data.alumnos$Q11.6, Q11.6)
+```
+
+***
+
+### Dimensión 1.2 - Gestión
+```{r Q12}
+Q.plots(data.alumnos$Q12.7, Q12.7)
+Q.plots(data.alumnos$Q12.8, Q12.8)
+Q.plots(data.alumnos$Q12.9, Q12.9)
+Q.plots(data.alumnos$Q12.11, Q12.11)
+Q.plots(data.alumnos$Q12.12, Q12.12)
+Q.plots(data.alumnos$Q12.13, Q12.13)
+Q.plots(data.alumnos$Q12.14, Q12.14)
+Q.plots(data.alumnos$Q12.15, Q12.15)
+Q.plots(data.alumnos$Q12.16, Q12.16)
+Q.plots(data.alumnos$Q12.17, Q12.17)
+Q.plots(data.alumnos$Q12.18, Q12.18)
+```
+
+***
+
+### Dimensión 2.1 - Objetivos de la carrera y Perfil de Egreso
+```{r Q21}
+Q.plots(data.alumnos$Q21.1, Q21.1)
+Q.plots(data.alumnos$Q21.2, Q21.2)
+Q.plots(data.alumnos$Q21.3, Q21.3)
+Q.plots(data.alumnos$Q21.4, Q21.4)
+Q.plots(data.alumnos$Q21.5, Q21.5)
+Q.plots(data.alumnos$Q21.6, Q21.6)
+```
+
+***
+
+### Dimensión 2.2 - Plan de Estudios
+```{r Q22}
+Q.plots(data.alumnos$Q22.7, Q22.7)
+Q.plots(data.alumnos$Q22.8, Q22.8)
+Q.plots(data.alumnos$Q22.9, Q22.9)
+Q.plots(data.alumnos$Q22.10, Q22.10)
+Q.plots(data.alumnos$Q22.11, Q22.11)
+Q.plots(data.alumnos$Q22.12, Q22.12)
+Q.plots(data.alumnos$Q22.13, Q22.13)
+```
+
+***
+
+### Dimensión 2.3 - Proceso enseñanza-aprendizaje
+```{r Q23}
+Q.plots(data.alumnos$Q23.14, Q23.14)
+Q.plots(data.alumnos$Q23.15, Q23.15)
+Q.plots(data.alumnos$Q23.16, Q23.16)
+Q.plots(data.alumnos$Q23.18, Q23.18)
+Q.plots(data.alumnos$Q23.19, Q23.19)
+```
+
+***
+
+### Dimensión 2.4 - Evaluación del proceso enseñanza-aprendizaje
+```{r Q24}
+Q.plots(data.alumnos$Q24.22, Q24.22)
+Q.plots(data.alumnos$Q24.23, Q24.23)
+Q.plots(data.alumnos$Q24.24, Q24.24)
+Q.plots(data.alumnos$Q24.25, Q24.25)
+```
+
+***
+
+### Dimensión 2.5 - Investigación & extensión
+```{r Q25}
+Q.plots(data.alumnos$Q25.26, Q25.26)
+Q.plots(data.alumnos$Q25.27, Q25.27)
+Q.plots(data.alumnos$Q25.28, Q25.28)
+Q.plots(data.alumnos$Q25.29, Q25.29)
+Q.plots(data.alumnos$Q25.30, Q25.30)
+Q.plots(data.alumnos$Q25.31, Q25.31)
+Q.plots(data.alumnos$Q25.32, Q25.32)
+```
+
+***
+
+### Dimensión 3.1 - Directivos
+```{r Q31}
+Q.plots(data.alumnos$Q31.1, Q31.1)
+Q.plots(data.alumnos$Q31.2, Q31.2)
+Q.plots(data.alumnos$Q31.3, Q31.3)
+Q.plots(data.alumnos$Q31.4, Q31.4)
+Q.plots(data.alumnos$Q31.5, Q31.5)
+Q.plots(data.alumnos$Q31.6, Q31.6)
+Q.plots(data.alumnos$Q31.7, Q31.7)
+Q.plots(data.alumnos$Q31.8, Q31.8)
+Q.plots(data.alumnos$Q31.9, Q31.9)
+Q.plots(data.alumnos$Q31.10, Q31.10)
+Q.plots(data.alumnos$Q31.11, Q31.11)
+Q.plots(data.alumnos$Q31.12, Q31.12)
+```
+
+***
+
+### Dimensión 3.2 - Docentes
+```{r Q32}
+Q.plots(data.alumnos$Q32.13, Q32.13)
+Q.plots(data.alumnos$Q32.14, Q32.14)
+Q.plots(data.alumnos$Q32.15, Q32.15)
+Q.plots(data.alumnos$Q32.16, Q32.16)
+Q.plots(data.alumnos$Q32.17, Q32.17)
+Q.plots(data.alumnos$Q32.18, Q32.18)
+Q.plots(data.alumnos$Q32.19, Q32.19)
+Q.plots(data.alumnos$Q32.20, Q32.20)
+Q.plots(data.alumnos$Q32.21, Q32.21)
+Q.plots(data.alumnos$Q32.22, Q32.22)
+```
+
+***
+
+### Dimensión 3.3 - Estudiantes
+```{r Q33}
+Q.plots(data.alumnos$Q33.23, Q33.23)
+Q.plots(data.alumnos$Q33.24, Q33.24)
+Q.plots(data.alumnos$Q33.25, Q33.25)
+Q.plots(data.alumnos$Q33.26, Q33.26)
+```
+
+***
+
+### Dimensión 3.4 - Personal administrativo y de apoyo
+```{r Q34}
+Q.plots(data.alumnos$Q34.27, Q34.27)
+Q.plots(data.alumnos$Q34.28, Q34.28)
+Q.plots(data.alumnos$Q34.29, Q34.29)
+Q.plots(data.alumnos$Q34.30, Q34.30)
+Q.plots(data.alumnos$Q34.31, Q34.31)
+Q.plots(data.alumnos$Q34.32, Q34.32)
+Q.plots(data.alumnos$Q34.33, Q34.33)
+```
+
+***
+
+### Dimensión 4.1 - Infraestructura, equipamientos e insumos
+```{r Q41}
+Q.plots(data.alumnos$Q41.1, Q41.1)
+Q.plots(data.alumnos$Q41.2, Q41.2)
+Q.plots(data.alumnos$Q41.3, Q41.3)
+Q.plots(data.alumnos$Q41.4, Q41.4)
+Q.plots(data.alumnos$Q41.5, Q41.5)
+Q.plots(data.alumnos$Q41.6, Q41.6)
+Q.plots(data.alumnos$Q41.7, Q41.7)
+Q.plots(data.alumnos$Q41.8, Q41.8)
+Q.plots(data.alumnos$Q41.9, Q41.9)
+Q.plots(data.alumnos$Q41.10, Q41.10)
+Q.plots(data.alumnos$Q41.11, Q41.11)
+Q.plots(data.alumnos$Q41.12, Q41.12)
+Q.plots(data.alumnos$Q41.13, Q41.13)
+Q.plots(data.alumnos$Q41.14, Q41.14)
+Q.plots(data.alumnos$Q41.15, Q41.15)
+Q.plots(data.alumnos$Q41.16, Q41.16)
+Q.plots(data.alumnos$Q41.17, Q41.17)
+Q.plots(data.alumnos$Q41.18, Q41.18)
+Q.plots(data.alumnos$Q41.19, Q41.19)
+Q.plots(data.alumnos$Q41.20, Q41.20)
+Q.plots(data.alumnos$Q41.21, Q41.21)
+
+```
+
+***
