@@ -1,7 +1,7 @@
 Autoevaluación Institucional BIOQUÍMICA 2014
 =============
 
-Este repositorio contiene los resultados de las encuestas 2014 de "Autoevaluación Institucional" de la `Carrera de Bioquímica` de la Facultad de Química de la Universidad del Norte, llevadas a cabo en agosto de 2014 a docentes, alumnos y personal administrativo/de apoyo de la carrera, y de empleadores de egresados de la Carrera. Se incluyen además las bases de datos y figuras asociadas. La base de datos fue confeccionada a partir de los formularios de encuestas remitidos por el Comité de Autoevaluación de la Carrera. El análisis estuvo a cargo del [Prof. Dr. Alcides Chaux](https://github.com/alcideschaux), Director de Investigaciones Científicas de la Universidad del Norte.
+Este repositorio contiene los resultados de las encuestas 2014 de "Autoevaluación Institucional" de la `Carrera de Bioquímica` de la Facultad de Química de la Universidad del Norte, llevadas a cabo en agosto de 2014 a docentes, alumnos y personal administrativo/de apoyo de la carrera, y a empleadores de egresados de la Carrera. Se incluyen además las bases de datos, figuras asociadas y el código utilizado para el análisis. La base de datos fue confeccionada a partir de los formularios de encuestas remitidos por la Dirección General Académica de la Universidad del Norte. El análisis estuvo a cargo del [Prof. Dr. Alcides Chaux](https://github.com/alcideschaux), Director de Investigaciones Científicas de la Universidad del Norte.
 
 ## Docentes
 * [Reporte de resultados](https://github.com/alcideschaux/Bioquimica2014/blob/master/Docentes/Bioquimica2014Docentes.md): en esta página se reportan los resultados de las encuestas hechas a los docentes.
